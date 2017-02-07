@@ -1,0 +1,29 @@
+sudo: false
+language: python
+python:
+- '3.4'
+script:
+- ./waf configure clean build dist
+before_deploy:
+- pushd build
+- export ZFILE=$(ls script.module.streamlink.crypto-*.zip)
+- md5sum "${ZFILE}" > "${ZFILE}.md5"
+- popd
+- mkdir -p dist/
+- cp build/script.module.streamlink.crypto* build/icon.png build/addon.xml dist/
+deploy:
+  provider: s3
+  access_key_id: AKIAJA536STKTMHCZFZQ
+  secret_access_key:
+    secure: Ak14/KBJmLQV1R445wewD0i3J4ZvpbqG7bhDEdllMJNLvta0MUpqbxCktTojFlXutEr4D5NjnT9TYx3mjsaF6SUqI8ZikbXl2flbQVH64efLiJl9YFd6pPs7TN5tNmAI7CqwIU92zE9qR07dKyGlUhsHWK9euNzMGBrrjALdEzPXpVuvMdFIVzMQsxVJGSn1KP4p8E6DOVCrSW2r29h9cTOMKMW9VNWylu06zAEMCZK9UNnaOdiBfwvfRWCF6Tqk0r80YsGGpSQn7qtZtXDXtuDnruwCXSc/2FmRlFDk7d979jRhBZNzAu8wVNPXUuuvMZ6Ct7elzwOCVHhlYbLV1kBYk05ZYzjQ/vXQ1shJQJ92M6TWM0Tg3Zpw/1zJP+gGJQVwE+HRNWr2U/DxBKG+XNlxYspgL/rjR/lZ3Ipl2une3qIBzIirzlVqBsZwHt9IA0gaa33S07VTYEwjMMLeloT/09I2mtdaJUKJwxfRWr/oYU8eQTeblJ9OzYzqbqZRGHggLpHlICnfWyzkQQ8jwKUv+ApRcM0SoeAy7BzGR71Pz4bk4yJmz7f30kQIkC53RUofGJXu478wp1T4/csbCP9P/iWR8B9nck7GyuOVM55n8RUPH1mug/m0trebtNzImIkc9PaRSr5WEY/Z/zeI+rK3HVivnUpAOVBrveZsYYE=
+  bucket: xbmc.beardypig.plugins
+  local-dir: dist
+  upload-dir: addons/script.module.streamlink.crypto
+  skip_cleanup: true
+  on:
+    repo: beardypig/script.module.streamlink.crypto
+    tags: true
+after_deploy:
+- gem install travis
+- curl -LO https://raw.github.com/mernst/plume-lib/master/bin/trigger-travis.sh
+- sh trigger-travis.sh beardypig xbmc.beardypig.plugins $TRAVIS_ACCESS_TOKEN
