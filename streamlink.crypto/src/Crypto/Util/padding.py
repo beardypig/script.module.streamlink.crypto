@@ -35,32 +35,32 @@ UNPAD = 1
 def bitPadding(padData, direction, length=None):
     """Pad a string using bitPadding
 
-            padData = raw string to pad/unpad
-            direction = PAD or UNPAD
-            length = amount of bytes the padded string should be a multiple of
-                     (length variable is not used when unpadding)
-            
-            returns: (un)padded raw string
-            
-            A new block full of padding will be added when padding data that is
-            already a multiple of the length.
-            
-            Example:
-            =========
-            >>> import padding
+        padData = raw string to pad/unpad
+        direction = PAD or UNPAD
+        length = amount of bytes the padded string should be a multiple of
+                 (length variable is not used when unpadding)
 
-            >>> padding.bitPadding('test', padding.PAD, 8)
-            'test\\x80\\x00\\x00\\x00'
-            >>> padding.bitPadding(_,padding.UNPAD)
-            'test'"""
+        returns: (un)padded raw string
+
+        A new block full of padding will be added when padding data that is
+        already a multiple of the length.
+
+        Example:
+        =========
+        >>> import padding
+
+        >>> padding.bitPadding('test', padding.PAD, 8)
+        'test\\x80\\x00\\x00\\x00'
+        >>> padding.bitPadding(_,padding.UNPAD)
+        'test'"""
     if direction == PAD:
         if length == None:
-            raise ValueError("Supply a valid length")
+            raise ValueError, "Supply a valid length"
         return __bitPadding(padData, length)
     elif direction == UNPAD:
         return __bitPadding_unpad(padData)
     else:
-        raise ValueError("Supply a valid direction")
+        raise ValueError, "Supply a valid direction"
 
 
 def __bitPadding(toPad, length):
@@ -78,26 +78,26 @@ def __bitPadding_unpad(padded):
 def zerosPadding(padData, direction, length=None):
     """Pad a string using zerosPadding
 
-            padData = raw string to pad/unpad
-            direction = PAD or UNPAD
-                        beware: padding and unpadding a string ending in 0's
-                                will remove those 0's too
-            length = amount of bytes the padded string should be a multiple of
-                     (length variable is not used when unpadding)
-            
-            returns: (un)padded raw string
-            
-            No padding will be added when padding data that is already a
-            multiple of the given length.
-            
-            Example:
-            =========
-            >>> import padding
+        padData = raw string to pad/unpad
+        direction = PAD or UNPAD
+                    beware: padding and unpadding a string ending in 0's
+                            will remove those 0's too
+        length = amount of bytes the padded string should be a multiple of
+                 (length variable is not used when unpadding)
 
-            >>> padding.zerosPadding('12345678',padding.PAD,16)
-            '12345678\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00'
-            >>> padding.zerosPadding(_,padding.UNPAD)
-            '12345678'"""
+        returns: (un)padded raw string
+
+        No padding will be added when padding data that is already a
+        multiple of the given length.
+
+        Example:
+        =========
+        >>> import padding
+
+        >>> padding.zerosPadding('12345678',padding.PAD,16)
+        '12345678\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x00'
+        >>> padding.zerosPadding(_,padding.UNPAD)
+        '12345678'"""
     if direction == PAD:
         if length == None:
             raise ValueError, "Supply a valid length"
@@ -120,24 +120,24 @@ def __zerosPadding_unpad(padded):
 def PKCS7(padData, direction, length=None):
     """Pad a string using PKCS7
 
-            padData = raw string to pad/unpad
-            direction = PAD or UNPAD
-            length = amount of bytes the padded string should be a multiple of
-                     (length variable is not used when unpadding)
-            
-            returns: (un)padded raw string
-            
-            A new block full of padding will be added when padding data that is
-            already a multiple of the given length.
-            
-            Example:
-            =========
-            >>> import padding
+        padData = raw string to pad/unpad
+        direction = PAD or UNPAD
+        length = amount of bytes the padded string should be a multiple of
+                 (length variable is not used when unpadding)
 
-            >>> padding.PKCS7('12345678',padding.PAD,16)
-            '12345678\\x08\\x08\\x08\\x08\\x08\\x08\\x08\\x08'
-            >>> padding.PKCS7(_,padding.UNPAD)
-            '12345678'"""
+        returns: (un)padded raw string
+
+        A new block full of padding will be added when padding data that is
+        already a multiple of the given length.
+
+        Example:
+        =========
+        >>> import padding
+
+        >>> padding.PKCS7('12345678',padding.PAD,16)
+        '12345678\\x08\\x08\\x08\\x08\\x08\\x08\\x08\\x08'
+        >>> padding.PKCS7(_,padding.UNPAD)
+        '12345678'"""
     if direction == PAD:
         if length == None:
             raise ValueError, "Supply a valid length"
@@ -169,24 +169,24 @@ def __PKCS7_unpad(padded):
 def ANSI_X923(padData, direction, length=None):
     """Pad a string using ANSI_X923
 
-            padData = raw string to pad/unpad
-            direction = PAD or UNPAD
-            length = amount of bytes the padded string should be a multiple of
-                     (length variable is not used when unpadding)
-            
-            returns: (un)padded raw string
-            
-            A new block full of padding will be added when padding data that is
-            already a multiple of the given length.
-            
-            Example:
-            =========
-            >>> import padding
-            
-            >>> padding.ANSI_X923('12345678',padding.PAD,16)
-            '12345678\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x08'
-            >>> padding.ANSI_X923(_,padding.UNPAD)
-            '12345678'"""
+        padData = raw string to pad/unpad
+        direction = PAD or UNPAD
+        length = amount of bytes the padded string should be a multiple of
+                 (length variable is not used when unpadding)
+
+        returns: (un)padded raw string
+
+        A new block full of padding will be added when padding data that is
+        already a multiple of the given length.
+
+        Example:
+        =========
+        >>> import padding
+
+        >>> padding.ANSI_X923('12345678',padding.PAD,16)
+        '12345678\\x00\\x00\\x00\\x00\\x00\\x00\\x00\\x08'
+        >>> padding.ANSI_X923(_,padding.UNPAD)
+        '12345678'"""
     if direction == PAD:
         if length == None:
             raise ValueError, "Supply a valid length"
@@ -217,23 +217,23 @@ def __ANSI_X923_unpad(padded):
 def ISO_10126(padData, direction, length=None):
     """Pad a string using ISO_10126
 
-            padData = raw string to pad/unpad
-            direction = PAD or UNPAD
-            length = amount of bytes the padded string should be a multiple of
-                     (length variable is not used when unpadding)
-            
-            returns: (un)padded raw string
-            
-            A new block full of padding will be added when padding data that is
-            already a multiple of the given length.
-            
-            Example:
-            =========
-            >>> import padding
+        padData = raw string to pad/unpad
+        direction = PAD or UNPAD
+        length = amount of bytes the padded string should be a multiple of
+                 (length variable is not used when unpadding)
 
-            >>> padded = padding.ISO_10126('12345678',padding.PAD,16)
-            >>> padding.ISO_10126(padded,padding.UNPAD)
-            '12345678'"""
+        returns: (un)padded raw string
+
+        A new block full of padding will be added when padding data that is
+        already a multiple of the given length.
+
+        Example:
+        =========
+        >>> import padding
+
+        >>> padded = padding.ISO_10126('12345678',padding.PAD,16)
+        >>> padding.ISO_10126(padded,padding.UNPAD)
+        '12345678'"""
     if direction == PAD:
         if length == None:
             raise ValueError, "Supply a valid length"
@@ -253,3 +253,11 @@ def __ISO_10126(toPad, length):
 def __ISO_10126_unpad(padded):
     return padded[0:len(padded) - ord(padded[-1])]
 
+
+def _test():
+    import doctest
+    doctest.testmod()
+
+
+if __name__ == "__main__":
+    _test()

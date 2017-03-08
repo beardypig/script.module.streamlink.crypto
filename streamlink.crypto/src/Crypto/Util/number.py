@@ -73,7 +73,7 @@ def size (N):
     Returns the size of the number N in bits.
     """
     bits = 0
-    while N >> bits:
+    while (N >> bits) != 0:
         bits += 1
     return bits
 

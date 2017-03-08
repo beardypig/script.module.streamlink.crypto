@@ -1,6 +1,6 @@
 import os
 APPNAME = "script.module.streamlink.crypto"
-VERSION = "1.0.0"
+VERSION = "1.1.0"
 
 out = "build"
 
@@ -11,9 +11,10 @@ def configure(ctx):
 
 def build(bld):
     streamlink_src = bld.path.make_node("streamlink.crypto/src/")
-    bld(rule='cp -r ${SRC} ${TGT}',
-        source=streamlink_src.make_node("Crypto/"),
-        target=bld.path.get_bld().make_node("lib/Crypto/"))
+    for package in ("Crypto", "cryptopy", "fmath", "rsa", "binascii_plus.py", "pyblowfish.py"):
+        bld(rule='cp -r ${SRC} ${TGT}',
+            source=streamlink_src.make_node("{0}/".format(package)),
+            target=bld.path.get_bld().make_node("lib/{0}/".format(package)))
 
     bld(features="subst", source="addon.xml.in", target="addon.xml",
         APPNAME=APPNAME, VERSION=VERSION)
