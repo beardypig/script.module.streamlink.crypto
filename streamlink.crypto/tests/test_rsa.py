@@ -1,18 +1,15 @@
 #!/usr/bin/env python
-import base64
 import logging
 import unittest
-import os.path
+
 from mock import patch
 
 log = logging.getLogger(__name__)
-
 pkey = "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDxXRQEYXnMrwbmhiJFK1hTNmMNSIatf25VDTepknGBiHzc"\
        "Br8VDw2wOWDhaLTOQ1uDm18zrzGprM+NYnIxXvgcNeQ0eEWx3YmPdRI01gNsl0nz5PEzHRkKiiTJ"\
        "xUuO1UgVt9YYAlrvVc77JnawN7nm3Yc9lQkC4B3JOBxXIYFai+Cq94WuNsiLLjM3FwpZuiMD55oY"\
        "UZ4abPP854+aH6fqS3Zzym8aTiO6v1AHpVQBl7Xj5/ZBhmYtOMh4q69ioI7aE669ZX3lEvIXGA54"\
        "i5yyXpo3YUom0+x34+gi/n+9dS9iOY80E6fQvmnPVEjefMBnyayJqfocwEaUvMuMeFhP"
-
 
 
 class TestAES(unittest.TestCase):

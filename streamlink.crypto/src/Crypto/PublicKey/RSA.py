@@ -2,7 +2,7 @@
 from __future__ import absolute_import
 import binascii
 import struct
-from rsa import PublicKey
+from rsa import PublicKey, PrivateKey
 from Crypto.Math.Numbers import Integer
 
 

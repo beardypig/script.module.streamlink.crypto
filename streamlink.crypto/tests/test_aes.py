@@ -1,7 +1,6 @@
 #!/usr/bin/env python
 import logging
 import unittest
-import os.path
 
 log = logging.getLogger(__name__)
 
