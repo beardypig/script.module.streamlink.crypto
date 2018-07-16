@@ -1,6 +1,6 @@
 import os
 APPNAME = "script.module.streamlink.crypto"
-VERSION = "1.1.0"
+VERSION = "1.1.1"
 
 out = "build"
 
